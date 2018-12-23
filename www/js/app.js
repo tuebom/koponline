@@ -71,7 +71,7 @@ var app  = new Framework7({
       });
       
         
-      app.request.get('http://212.24.111.23/koponline/nasabah/'+app.data.nonsb, function (res) { // + app.data.nonsb
+      app.request.get('http://212.24.111.23/koponline/nasabah/'+app.data.nonsb, function (res) {
         
         var data = JSON.parse(res);
       
@@ -106,7 +106,22 @@ var app  = new Framework7({
         //   app.dialog.alert(data.message, 'Koperasi');
         }
 
-        app.request.get('http://212.24.111.23/koponline/nasabah/infosw/'+app.data.nonsb, function (res) { // + app.data.nonsb
+        app.request.get('http://212.24.111.23/koponline/nasabah/infosk/'+app.data.nonsb, function (res) {
+        
+        var data = JSON.parse(res);
+      
+        if (data.status) {
+            var html = '<div class="card">'
+            html += '  <div class="card-content">'
+            html += '    <div class="card-content-inner"><b>SIMPANAN KHUSUS</b><br>Saldo: ' + data.saldo + '</div>'
+            html += '  </div>'
+            html += '</div>'
+            $$('.page-content.main').append(html)
+        } else {
+          app.dialog.alert(data.message, 'Koperasi');
+        }
+
+        app.request.get('http://212.24.111.23/koponline/nasabah/infosw/'+app.data.nonsb, function (res) {
         
         var data = JSON.parse(res);
       
@@ -131,7 +146,7 @@ var app  = new Framework7({
           app.dialog.alert(data.message, 'Koperasi');
         }
         
-        app.request.get('http://212.24.111.23/koponline/nasabah/infokrd/'+app.data.nonsb, function (res) { // + app.data.nonsb
+        app.request.get('http://212.24.111.23/koponline/nasabah/infokrd/'+app.data.nonsb, function (res) {
           
           var data = JSON.parse(res);
         
@@ -157,7 +172,7 @@ var app  = new Framework7({
       });
     });
       
-      /*app.request.get('http://212.24.111.23/koponline/nasabah/infosw/'+app.data.nonsb, function (res) { // + app.data.nonsb
+      /*app.request.get('http://212.24.111.23/koponline/nasabah/infosw/'+app.data.nonsb, function (res) {
         
         var data = JSON.parse(res);
       
@@ -179,7 +194,7 @@ var app  = new Framework7({
         }
       });*/
       
-      /*app.request.get('http://212.24.111.23/koponline/nasabah/infotab/'+app.data.nonsb, function (res) { // + app.data.nonsb
+      /*app.request.get('http://212.24.111.23/koponline/nasabah/infotab/'+app.data.nonsb, function (res) {
         
         var data = JSON.parse(res);
       
@@ -197,7 +212,7 @@ var app  = new Framework7({
         }
       });*/
       
-      /*app.request.get('http://212.24.111.23/koponline/nasabah/infokrd/'+app.data.nonsb, function (res) { // + app.data.nonsb
+      /*app.request.get('http://212.24.111.23/koponline/nasabah/infokrd/'+app.data.nonsb, function (res) {
         
         var data = JSON.parse(res);
       
@@ -221,7 +236,7 @@ var app  = new Framework7({
         }
       });*/
       
-      /*app.request.get('http://212.24.111.23/koponline/sistem/antrian', function (res) { // + app.data.nonsb
+      /*app.request.get('http://212.24.111.23/koponline/sistem/antrian', function (res) {
         
         var data = JSON.parse(res);
       
@@ -614,8 +629,6 @@ $$('#my-login-screen .login-button').on('click', function () {
 
     if (data.status) {
 
-      console.log(data);
-      
       localStorage.setItem('nonsb', data.nonsb);
       localStorage.setItem('pin', pin);
 
