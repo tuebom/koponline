@@ -82,7 +82,7 @@ var app  = new Framework7({
             html += '    <br>Alamat: ' + data.alamat + '</div>'
             html += '  </div>'
             html += '</div>'
-            $$('.page-content').append(html)
+            $$('.page-content.main').append(html)
         } else {
           app.dialog.alert(data.message, 'Koperasi');
         }
@@ -101,13 +101,12 @@ var app  = new Framework7({
           html += '    <div class="card-content-inner"><b>SIMPANAN POKOK</b><br>Rp' + data.pokok +'</div>'
           html += '  </div>'
           html += '</div>'
-          $$('.page-content').append(html)
+          $$('.page-content.main').append(html)
         // } else {
         //   app.dialog.alert(data.message, 'Koperasi');
         }
-      });
-      
-      app.request.get('http://212.24.111.23/koponline/nasabah/infosw/'+app.data.nonsb, function (res) { // + app.data.nonsb
+
+        app.request.get('http://212.24.111.23/koponline/nasabah/infosw/'+app.data.nonsb, function (res) { // + app.data.nonsb
         
         var data = JSON.parse(res);
       
@@ -116,14 +115,69 @@ var app  = new Framework7({
             html += '  <div class="card-content">'
             html += '    <div class="card-content-inner"><b>SIMPANAN WAJIB</b><br>Saldo: ' + data.saldo
             html += '    <br>Nominal setoran: 100.000'
-            html += '    <br>Status: ' + (data.stbayar == '') ? 'BELUM BAYAR':'SUDAH BAYAR'; +'</div>'
+            if (data.stbayar == '') {
+              if (data.tunggak > data.nominal) {
+                html += '    <br>Status: BELUM BAYAR<br>Tunggakan: '+data.tunggak+'</div>'
+              } else {
+                html += '    <br>Status: BELUM BAYAR</div>'
+              }
+            } else {
+              html += '    <br>Status: SUDAH BAYAR</div>'
+            }
             html += '  </div>'
             html += '</div>'
-            $$('.page-content').append(html)
+            $$('.page-content.main').append(html)
         } else {
           app.dialog.alert(data.message, 'Koperasi');
         }
+        
+        app.request.get('http://212.24.111.23/koponline/nasabah/infokrd/'+app.data.nonsb, function (res) { // + app.data.nonsb
+          
+          var data = JSON.parse(res);
+        
+          if (data.status) {
+              var html = '<div class="card">'
+              html += '  <div class="card-content">'
+              html += '    <div class="card-content-inner"><b>PINJAMAN</b><br>Sisa angsuran: ' + data.sisa.toLocaleString('ID')
+              html += '    <br>Nominal angsuran: '+data.angspk.toLocaleString('ID')
+              html += '    <br>Angsuran '+data.angsur+'/'+data.jwaktu
+              if (data.stbayar == '') {
+                html += '    <br>Status: BELUM BAYAR</div>'
+              } else {
+                html += '    <br>Status: SUDAH BAYAR</div>'
+              }
+              html += '  </div>'
+              html += '</div>'
+              $$('.page-content.main').append(html)
+          } /*else {
+            app.dialog.alert(data.message, 'Koperasi');
+            // tidak ada data pinjaman
+          }*/
+        });
       });
+    });
+      
+      /*app.request.get('http://212.24.111.23/koponline/nasabah/infosw/'+app.data.nonsb, function (res) { // + app.data.nonsb
+        
+        var data = JSON.parse(res);
+      
+        if (data.status) {
+            var html = '<div class="card">'
+            html += '  <div class="card-content">'
+            html += '    <div class="card-content-inner"><b>SIMPANAN WAJIB</b><br>Saldo: ' + data.saldo
+            html += '    <br>Nominal setoran: 100.000'
+            if (data.stbayar == '') {
+              html += '    <br>Status: BELUM BAYAR</div>'
+            } else {
+              html += '    <br>Status: SUDAH BAYAR</div>'
+            }
+            html += '  </div>'
+            html += '</div>'
+            $$('.page-content.main').append(html)
+        } else {
+          app.dialog.alert(data.message, 'Koperasi');
+        }
+      });*/
       
       /*app.request.get('http://212.24.111.23/koponline/nasabah/infotab/'+app.data.nonsb, function (res) { // + app.data.nonsb
         
@@ -137,31 +191,35 @@ var app  = new Framework7({
             html += '    <br>Status: BELUM BAYAR</div>'
             html += '  </div>'
             html += '</div>'
-            $$('.page-content').append(html)
+            $$('.page-content.main').append(html)
         } else {
           app.dialog.alert(data.message, 'Koperasi');
         }
       });*/
       
-      app.request.get('http://212.24.111.23/koponline/nasabah/infokrd/'+app.data.nonsb, function (res) { // + app.data.nonsb
+      /*app.request.get('http://212.24.111.23/koponline/nasabah/infokrd/'+app.data.nonsb, function (res) { // + app.data.nonsb
         
         var data = JSON.parse(res);
       
         if (data.status) {
             var html = '<div class="card">'
             html += '  <div class="card-content">'
-            html += '    <div class="card-content-inner"><b>PINJAMAN</b><br>Sisa angsuran: ' + data.sisa
-            html += '    <br>Nominal angsuran: '+data.angspk
+            html += '    <div class="card-content-inner"><b>PINJAMAN</b><br>Sisa angsuran: ' + data.sisa.toLocaleString('ID')
+            html += '    <br>Nominal angsuran: '+data.angspk.toLocaleString('ID')
             html += '    <br>Angsuran '+data.angsur+'/'+data.jwaktu+'</div>'
-            html += '    <br>Status: ' + (data.stbayar == '') ? 'BELUM BAYAR':'SUDAH BAYAR'; +'</div>'
+            if (data.stbayar == '') {
+              html += '    <br>Status: BELUM BAYAR</div>'
+            } else {
+              html += '    <br>Status: SUDAH BAYAR</div>'
+            }
             html += '  </div>'
             html += '</div>'
-            $$('.page-content').append(html)
+            $$('.page-content.main').append(html)
         } /*else {
           app.dialog.alert(data.message, 'Koperasi');
           // tidak ada data pinjaman
-        }*/
-      });
+        }
+      });*/
       
       /*app.request.get('http://212.24.111.23/koponline/sistem/antrian', function (res) { // + app.data.nonsb
         
@@ -175,7 +233,7 @@ var app  = new Framework7({
             html += '    <br>Status: BELUM BAYAR</div>'
             html += '  </div>'
             html += '</div>'
-            $$('.page-content').append(html)
+            $$('.page-content.main').append(html)
         } else {
           app.dialog.alert(data.message, 'Koperasi');
         }
@@ -727,6 +785,7 @@ $$('#ganti-pin .btnGanti').on('click', function () {
       $$('#ganti-pin [name="pinbaru"]').val('');
       
       app.popup.close($$('.page[data-name="ganti-pin"]').parents(".popup"));
+      app.dialog.alert('Data nomor PIN anda telah kami update.', 'Ganti PIN');
     } else {
       app.dialog.alert(data.message, 'Ganti PIN');
     }
