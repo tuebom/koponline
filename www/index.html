@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!--
+  Customize this policy to fit your own app's needs. For more guidance, see:
+      https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+  Some notes:
+      * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+      * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+      * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+          * Enable inline JS: add 'unsafe-inline' to default-src
+  -->
+  <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap: content:">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#2196f3">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <title>Koperasi</title>
+
+  <link rel="stylesheet" href="framework7/css/framework7.min.css">
+  <!--<link rel="stylesheet" href="css/framework7.keypad.min.css">-->
+  <link rel="stylesheet" href="css/icons.css">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Status bar overlay for fullscreen mode-->
+    <div class="statusbar"></div>
+    <!-- Left panel with reveal effect when hidden -->
+    <div class="panel panel-left panel-cover">
+      <div class="view view-left">
+        <div class="page">
+          <header>
+              <img class="responsive" src="img/back.jpg" />
+          </header>
+          <div class="list">
+            <ul class="menu">
+                <li>
+                  <a href="/akun/" data-view=".view-main" class="item-link item-content panel-close">
+                      <div class="item-media"><i class="material-icons menu">person</i></div>
+                      <div class="item-inner menu">
+                          <div class="item-title menu">Akun Saya</div>
+                      </div>
+                  </a>
+                </li>
+                <!--<li>
+                    <a href="/belanja/" data-view=".view-main" class="item-link item-content panel-close">
+                        <div class="item-media"><i class="material-icons menu">shopping_cart</i></div>
+                        <div class="item-inner menu">
+                            <div class="item-title menu">Belanja</div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/inbox/" data-view=".view-main" class="item-link item-content panel-close">
+                        <div class="item-media"><i class="material-icons menu">chat_bubble_outline</i></div>
+                        <div class="item-inner menu">
+                            <div class="item-title menu">Inbox</div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                  <a href="#" data-view=".view-main" class="item-link item-content panel-close ac-share">
+                    <div class="item-media"><i class="material-icons menu">share</i></div>
+                    <div class="item-inner menu">
+                      <div class="item-title menu">Share Aplikasi</div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://play.google.com/store/apps/details?id=com.app.abc" data-view=".view-main" class="item-link external item-content panel-close">
+                    <div class="item-media"><i class="material-icons menu">grade</i></div>
+                    <div class="item-inner menu">
+                      <div class="item-title menu">Rate Aplikasi</div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" data-view=".view-main" class="item-link item-content panel-close login-screen-open" data-login-screen="#my-login-screen">
+                    <div class="item-media"><i class="material-icons menu">power_settings_new</i></div>
+                    <div class="item-inner menu">
+                      <div class="item-title menu">Logout</div>
+                    </div>
+                  </a>
+                </li>-->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Your main view, should have "view-main" class -->
+    <div class="view view-main ios-edges">
+      <!-- Page, data-name contains page name which can be used in callbacks -->
+      <div class="page" data-name="home">
+        <!-- Top Navbar -->
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="left">
+              <a href="#" class="link icon-only panel-open" data-panel="left">
+                <i class="icon f7-icons ios-only">menu</i>
+                <i class="icon material-icons md-only">menu</i>
+              </a>
+            </div>
+            <div class="title sliding">Koperasi</div>
+            <div class="right">
+              <!--<a href="#" class="link icon-only panel-open" data-panel="right">-->
+              <!--<a href="/komplain/" class="link icon-only">
+                <i class="icon f7-icons ios-only">chat</i>
+                <i class="icon material-icons md-only">chat</i>
+              </a>-->
+            </div>
+          </div>
+        </div>
+        
+        <!-- Toolbar-->
+        <!--<div class="toolbar">
+          <div class="toolbar-inner">
+            <a href="/akun/" class="link"><i class="material-icons">account_balance_wallet</i>&nbsp;&nbsp;<span class="saldo"><span></a>
+          </div>
+        </div>-->
+
+        <!-- Scrollable page content-->
+        <div class="page-content main">
+          <!-- <div class="block header">-->
+            <!-- image source: https://www.cnnindonesia.com/ekonomi/20170913213532-92-241579/mahasiswa-diminta-ikut-hidupkan-kembali-koperasi -->
+            <!--<img class="profile-header" src="img/back.jpg" />-->
+            <!--<div data-pagination='{"el": ".swiper-pagination"}' class="swiper-container swiper-init demo-swiper">
+              <div class="swiper-pagination"></div>
+              <div class="swiper-wrapper">
+                <div class="swiper-slide"><img class="lazy header" src="http://212.24.111.23/koponline/images/back1.jpg" /></div>
+                <div class="swiper-slide"><img class="lazy header" src="http://212.24.111.23/koponline/images/back2.jpg" /></div>
+                <div class="swiper-slide"><img class="lazy header" src="http://212.24.111.23/koponline/images/back3.jpg" /></div>
+              </div>
+            </div>-->
+          <!-- </div>-->
+          
+          <div class="card">
+            <div class="card-content">
+              <div class="card-content-inner text-align-center"><h3>KOPKAR DANA PUNDI SEJAHTERA</h3>
+                No. Rekening: 8019113451
+                <br>Tgl. Update: <!--25/11/2018--><span class="lupdate"></span></div>
+            </div>
+          </div>
+          <!--<div class="card">
+            <div class="card-content">
+              <div class="card-content-inner"><b>SIMPANAN POKOK</b><br>Rp100.000</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <div class="card-content-inner"><b>SIMPANAN WAJIB</b><br>Rp1.000.000</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <div class="card-content-inner"><b>SISA PINJAMAN</b><br>Rp1.000.000<br>Angsuran ke-10</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <div class="card-content-inner"><b>ANGSURAN BULAN INI</b><br>Rp1.000.000</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <div class="card-content-inner"><b>ANTRIAN PERMOHONAN KREDIT</b><br>Rp1.000.000</div>
+            </div>
+          </div>-->
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup -->
+    <div class="popup" id="ganti-pin">
+      <div class="view">
+        <div class="page" data-name="ganti-pin">
+          <div class="navbar">
+            <div class="navbar-inner">
+              <div class="title">Ganti PIN</div>
+              <div class="right">
+                <a href="#" class="link popup-close">Close</a>
+              </div>
+            </div>
+          </div>
+          <div class="page-content">
+            <div class="block">
+              <form class="ganti-pin form-ajax-submit">
+              <div class="list no-hairlines-md">
+                <ul>
+                  <li>
+                    <div class="item-content item-input">
+                      <div class="item-inner">
+                        <div class="item-title item-label">PIN Lama</div>
+                        <div class="item-input-wrap">
+                          <input type="password" name="pinlama" placeholder="PIN Lama" />
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="item-content item-input">
+                      <div class="item-inner">
+                        <div class="item-title item-label">PIN Baru</div>
+                        <div class="item-input-wrap">
+                          <input type="password" name="pinbaru" placeholder="PIN Baru" />
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="content-block"><a href="#" class="button button-raised button-fill larger btnGanti">Kirim</a></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Login Screen -->
+    <div class="login-screen modal-in" id="my-login-screen">
+      <div class="view">
+        <div class="page">
+          <div class="page-content">
+
+            <div class="header-container">
+                <img class="profile-header" src="img/logo.jpg" />
+            </div>
+    
+            <form class="login-form form-ajax-submit">
+              <div class="block-header text-align-center"><h3>Login Member</h3></div>
+              <div class="block">
+                <div class="list no-hairlines-md">
+                    <ul>
+                      <!--<li>
+                        <div class="item-content item-input">
+                          <div class="item-inner">
+                            <div class="item-title item-label">ID Member</div>
+                            <div class="item-input-wrap">
+                              <input type="number" id="mbrid" name="mbrid" placeholder="ID Member" />
+                            </div>
+                          </div>
+                        </div>
+                      </li>-->
+                      <li>
+                        <div class="item-content item-input">
+                          <div class="item-inner">
+                            <div class="item-title item-label">Nomor Nasabah</div>
+                            <div class="item-input-wrap">
+                              <input type="number" id="nonsb" name="nonsb" placeholder="Nomor Nasabah" autocomplete="off"/>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="item-content item-input">
+                          <div class="item-inner">
+                            <div class="item-title item-label">PIN</div>
+                            <div class="item-input-wrap">
+                              <input type="password" id="pin" name="pin" placeholder="PIN"/>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                </div>
+              </div>
+              <div class="content-block"><a href="#" class="button button-raised button-fill larger login-button">LOGIN</a></div>
+            </form>
+          
+            <!--<div class="block-footer text-align-center">Belum punya akun? <a class="label-register" href="#">Register</a></div>-->
+  
+            <div class="kb"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Register Screen -->
+    <div class="login-screen" id="my-reg-screen">
+      <div class="view">
+        <div class="page">
+          <div class="page-content">
+
+            <div class="header-container">
+                <img class="profile-header" src="img/logo.jpg" />
+            </div>
+        
+            <form class="register-form form-ajax-submit">
+              <input type="hidden" name="prognum" value="1" />
+              <div class="block-header text-align-center"><h3>Registrasi Member</h3></div>
+              <div class="block">
+                <div class="list no-hairlines-md">
+                  <ul>
+                    <li>
+                      <div class="item-content item-input">
+                        <div class="item-inner">
+                          <div class="item-title item-label">Nama Lengkap Sesuai KTP</div>
+                          <div class="item-input-wrap">
+                            <input type="text" id="nama" name="nama" placeholder="Nama Lengkap" style="text-transform: uppercase" autocomplete="off" />
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="item-content item-input">
+                        <div class="item-inner">
+                          <div class="item-title item-label">Nomor HP</div>
+                          <div class="item-input-wrap">
+                            <input type="number" id="nohp-reg" name="nohp" placeholder="Nomor HP" autocomplete="off" />
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="content-block"><a href="#" class="button button-raised button-fill larger register-button">DAFTAR</a></div>
+            </form>
+
+            <div class="block-footer text-align-center">Sudah punya akun? <a class="label-login" href="#">Login</a></div>
+            
+            <div class="kb"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cordova -->
+  <!-- -->
+  <script src="cordova.js"></script>
+  <!-- -->
+
+  <!-- Framework7 library -->
+  <script src="framework7/js/framework7.min.js"></script>
+  <!-- Keypad plugin
+  <script src="js/framework7.keypad.min.js"></script>
+  -->
+
+  <!-- App routes -->
+  <script src="js/routes.js"></script>
+
+  <!-- Your custom app scripts -->
+  <script src="js/app.js"></script>
+</body>
+</html>
