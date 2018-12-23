@@ -108,69 +108,70 @@ var app  = new Framework7({
 
         app.request.get('http://212.24.111.23/koponline/nasabah/infosk/'+app.data.nonsb, function (res) {
         
-        var data = JSON.parse(res);
-      
-        if (data.status) {
-            var html = '<div class="card">'
-            html += '  <div class="card-content">'
-            html += '    <div class="card-content-inner"><b>SIMPANAN KHUSUS</b><br>Saldo: ' + data.saldo + '</div>'
-            html += '  </div>'
-            html += '</div>'
-            $$('.page-content.main').append(html)
-        } else {
-          app.dialog.alert(data.message, 'Koperasi');
-        }
-
-        app.request.get('http://212.24.111.23/koponline/nasabah/infosw/'+app.data.nonsb, function (res) {
-        
-        var data = JSON.parse(res);
-      
-        if (data.status) {
-            var html = '<div class="card">'
-            html += '  <div class="card-content">'
-            html += '    <div class="card-content-inner"><b>SIMPANAN WAJIB</b><br>Saldo: ' + data.saldo
-            html += '    <br>Nominal setoran: 100.000'
-            if (data.stbayar == '') {
-              if (data.tunggak > data.nominal) {
-                html += '    <br>Status: BELUM BAYAR<br>Tunggakan: '+data.tunggak+'</div>'
-              } else {
-                html += '    <br>Status: BELUM BAYAR</div>'
-              }
-            } else {
-              html += '    <br>Status: SUDAH BAYAR</div>'
-            }
-            html += '  </div>'
-            html += '</div>'
-            $$('.page-content.main').append(html)
-        } else {
-          app.dialog.alert(data.message, 'Koperasi');
-        }
-        
-        app.request.get('http://212.24.111.23/koponline/nasabah/infokrd/'+app.data.nonsb, function (res) {
-          
           var data = JSON.parse(res);
         
           if (data.status) {
               var html = '<div class="card">'
               html += '  <div class="card-content">'
-              html += '    <div class="card-content-inner"><b>PINJAMAN</b><br>Sisa angsuran: ' + data.sisa.toLocaleString('ID')
-              html += '    <br>Nominal angsuran: '+data.angspk.toLocaleString('ID')
-              html += '    <br>Angsuran '+data.angsur+'/'+data.jwaktu
-              if (data.stbayar == '') {
-                html += '    <br>Status: BELUM BAYAR</div>'
-              } else {
-                html += '    <br>Status: SUDAH BAYAR</div>'
-              }
+              html += '    <div class="card-content-inner"><b>SIMPANAN KHUSUS</b><br>Saldo: ' + data.saldo + '</div>'
               html += '  </div>'
               html += '</div>'
               $$('.page-content.main').append(html)
-          } /*else {
+          } else {
             app.dialog.alert(data.message, 'Koperasi');
-            // tidak ada data pinjaman
-          }*/
+          }
+
+          app.request.get('http://212.24.111.23/koponline/nasabah/infosw/'+app.data.nonsb, function (res) {
+          
+            var data = JSON.parse(res);
+          
+            if (data.status) {
+                var html = '<div class="card">'
+                html += '  <div class="card-content">'
+                html += '    <div class="card-content-inner"><b>SIMPANAN WAJIB</b><br>Saldo: ' + data.saldo
+                html += '    <br>Nominal setoran: 100.000'
+                if (data.stbayar == '') {
+                  if (data.tunggak > data.nominal) {
+                    html += '    <br>Status: BELUM BAYAR<br>Tunggakan: '+data.tunggak+'</div>'
+                  } else {
+                    html += '    <br>Status: BELUM BAYAR</div>'
+                  }
+                } else {
+                  html += '    <br>Status: SUDAH BAYAR</div>'
+                }
+                html += '  </div>'
+                html += '</div>'
+                $$('.page-content.main').append(html)
+            } else {
+              app.dialog.alert(data.message, 'Koperasi');
+            }
+          
+            app.request.get('http://212.24.111.23/koponline/nasabah/infokrd/'+app.data.nonsb, function (res) {
+              
+              var data = JSON.parse(res);
+            
+              if (data.status) {
+                  var html = '<div class="card">'
+                  html += '  <div class="card-content">'
+                  html += '    <div class="card-content-inner"><b>PINJAMAN</b><br>Sisa angsuran: ' + data.sisa.toLocaleString('ID')
+                  html += '    <br>Nominal angsuran: '+data.angspk.toLocaleString('ID')
+                  html += '    <br>Angsuran '+data.angsur+'/'+data.jwaktu
+                  if (data.stbayar == '') {
+                    html += '    <br>Status: BELUM BAYAR</div>'
+                  } else {
+                    html += '    <br>Status: SUDAH BAYAR</div>'
+                  }
+                  html += '  </div>'
+                  html += '</div>'
+                  $$('.page-content.main').append(html)
+              } /*else {
+                app.dialog.alert(data.message, 'Koperasi');
+                // tidak ada data pinjaman
+              }*/
+            });
+          });
         });
       });
-    });
       
       /*app.request.get('http://212.24.111.23/koponline/nasabah/infosw/'+app.data.nonsb, function (res) {
         
