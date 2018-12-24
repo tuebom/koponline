@@ -86,78 +86,55 @@ var app  = new Framework7({
         } else {
           app.dialog.alert(data.message, 'Koperasi');
         }
-      });
 
-      app.request.get('http://212.24.111.23/koponline/sistem/is_anggota/'+app.data.nonsb, function (res) {
-        
-        var data = JSON.parse(res);
-
-        if (data.status) {
-
+        app.request.get('http://212.24.111.23/koponline/sistem/is_anggota/'+app.data.nonsb, function (res) {
+          
           var data = JSON.parse(res);
 
-          var html = '<div class="card">'
-          html += '  <div class="card-content">'
-          html += '    <div class="card-content-inner"><b>SIMPANAN POKOK</b><br>Rp' + data.pokok +'</div>'
-          html += '  </div>'
-          html += '</div>'
-          $$('.page-content.main').append(html)
-        // } else {
-        //   app.dialog.alert(data.message, 'Koperasi');
-        }
-
-        app.request.get('http://212.24.111.23/koponline/nasabah/infosk/'+app.data.nonsb, function (res) {
-        
-          var data = JSON.parse(res);
-        
           if (data.status) {
-              var html = '<div class="card">'
-              html += '  <div class="card-content">'
-              html += '    <div class="card-content-inner"><b>SIMPANAN KHUSUS</b><br>Saldo: ' + data.saldo + '</div>'
-              html += '  </div>'
-              html += '</div>'
-              $$('.page-content.main').append(html)
-          } /*else {
-            app.dialog.alert(data.message, 'Koperasi');
-          }*/
 
-          app.request.get('http://212.24.111.23/koponline/nasabah/infosw/'+app.data.nonsb, function (res) {
+            var data = JSON.parse(res);
+
+            var html = '<div class="card">'
+            html += '  <div class="card-content">'
+            html += '    <div class="card-content-inner"><b>SIMPANAN POKOK</b><br>Rp' + data.pokok +'</div>'
+            html += '  </div>'
+            html += '</div>'
+            $$('.page-content.main').append(html)
+          // } else {
+          //   app.dialog.alert(data.message, 'Koperasi');
+          }
+
+          app.request.get('http://212.24.111.23/koponline/nasabah/infosk/'+app.data.nonsb, function (res) {
           
             var data = JSON.parse(res);
           
             if (data.status) {
                 var html = '<div class="card">'
                 html += '  <div class="card-content">'
-                html += '    <div class="card-content-inner"><b>SIMPANAN WAJIB</b><br>Saldo: ' + data.saldo
-                html += '    <br>Nominal setoran: 100.000'
-                if (data.stbayar == '') {
-                  if (data.tunggak > data.nominal) {
-                    html += '    <br>Status: BELUM BAYAR<br>Tunggakan: '+data.tunggakf+'</div>'
-                  } else {
-                    html += '    <br>Status: BELUM BAYAR</div>'
-                  }
-                } else {
-                  html += '    <br>Status: SUDAH BAYAR</div>'
-                }
+                html += '    <div class="card-content-inner"><b>SIMPANAN KHUSUS</b><br>Saldo: ' + data.saldo + '</div>'
                 html += '  </div>'
                 html += '</div>'
                 $$('.page-content.main').append(html)
             } /*else {
               app.dialog.alert(data.message, 'Koperasi');
             }*/
-          
-            app.request.get('http://212.24.111.23/koponline/nasabah/infokrd/'+app.data.nonsb, function (res) {
-              
+
+            app.request.get('http://212.24.111.23/koponline/nasabah/infosw/'+app.data.nonsb, function (res) {
+            
               var data = JSON.parse(res);
             
               if (data.status) {
                   var html = '<div class="card">'
                   html += '  <div class="card-content">'
-                  html += '    <div class="card-content-inner"><b>PINJAMAN</b><br>Sisa angsuran: ' + data.sisa
-                  html += '    <br>Nominal angsuran: '+data.angspk
-                  html += '    <br>Angsuran '+data.angsur+' / '+data.jwaktu
+                  html += '    <div class="card-content-inner"><b>SIMPANAN WAJIB</b><br>Saldo: ' + data.saldo
+                  html += '    <br>Nominal setoran: 100.000'
                   if (data.stbayar == '') {
-                    html += '    <br>Status: BELUM BAYAR</div>'
+                    if (data.tunggak > data.nominal) {
+                      html += '    <br>Status: BELUM BAYAR<br>Tunggakan: '+data.tunggakf+'</div>'
+                    } else {
+                      html += '    <br>Status: BELUM BAYAR</div>'
+                    }
                   } else {
                     html += '    <br>Status: SUDAH BAYAR</div>'
                   }
@@ -166,104 +143,101 @@ var app  = new Framework7({
                   $$('.page-content.main').append(html)
               } /*else {
                 app.dialog.alert(data.message, 'Koperasi');
-                // tidak ada data pinjaman
               }*/
+            
+              app.request.get('http://212.24.111.23/koponline/nasabah/infokrd/'+app.data.nonsb, function (res) {
+                
+                var data = JSON.parse(res);
+              
+                if (data.status) {
+                    var html = '<div class="card">'
+                    html += '  <div class="card-content">'
+                    html += '    <div class="card-content-inner"><b>PINJAMAN</b><br>Sisa pokok: ' + data.sisa
+                    html += '    <br>Nominal angsuran: '+data.angspk
+                    html += '    <br>Angsuran '+data.angsur+' / '+data.jwaktu
+                    if (data.stbayar == '') {
+                      html += '    <br>Status: BELUM BAYAR</div>'
+                    } else {
+                      html += '    <br>Status: SUDAH BAYAR</div>'
+                    }
+                    html += '  </div>'
+                    html += '</div>'
+                    $$('.page-content.main').append(html)
+                } /*else {
+                  app.dialog.alert(data.message, 'Koperasi');
+                  // tidak ada data pinjaman
+                }*/
+
+
+                app.request.get('http://212.24.111.23/koponline/sistem/antrian', function (res) {
+                
+                  var data = JSON.parse(res);
+                
+                  if (data.status) {
+
+                    var html = '<div class="card">'
+                    html += '  <div class="card-content">'
+                    html += '    <div class="card-content-inner"><b>DAFTAR ANTRIAN</b></div>'
+                    html += '  </div>'
+                    html += '</div>'
+                    html += '<div class="card data-table">'
+                    html += '<table class="preview-table">'
+                    html += '  <thead>'
+                    html += '    <tr>'
+                    html += '      <th class="label-cell">Nomor</th>'
+                    html += '      <th class="label-cell">Tgl. Input</th>'
+                    html += '      <th class="label-cell">Nama</th>'
+                    // html += '      <th class="label-cell">Alamat</th>'
+                    html += '      <th class="numeric-cell">Nominal</th>'
+                    html += '    </tr>'
+                    html += '  </thead>'
+                    html += '  <tbody>'
+
+                    var mohon = data.data;
+                    for (var i = 0; i < mohon.length; i++) {
+                      console.log(mohon[i].nama)
+                      html += '    <tr>'
+                      html += '      <td class="label-cell">'+mohon[i].nomhn+'</th>'
+                      html += '      <td class="label-cell">'+mohon[i].tglinput+'</th>'
+                      html += '      <td class="label-cell">'+mohon[i].nama+'</th>'
+                      // html += '      <td class="label-cell">'+mohon[i].alamat+'</th>'
+                      html += '      <td class="numeric-cell">'+mohon[i].pokok+'</th>'
+                      html += '    </tr>'
+                    }
+                    
+                    html += '  </tbody>'
+                    // html += '  <tfoot>'
+                    // html += '    <tr>'
+                    // html += '      <td class="label-cell"></td>'
+                    // html += '      <td class="label-cell"></td>'
+                    // html += '      <td class="label-cell"></td>'
+                    // html += '      <td class="label-cell"><b>TOTAL</b></td>'
+                    // html += '      <td class="numeric-cell total">0</td>'
+                    // html += '      <td></td>'
+                    // html += '    </tr>'
+                    // html += '  </tfoot>'
+                    html += '</table>'
+                    html += '</div>'
+
+                    $$('.page-content.main').append(html)
+                  }
+                });
+              });
             });
           });
         });
       });
-      
-      /*app.request.get('http://212.24.111.23/koponline/nasabah/infosw/'+app.data.nonsb, function (res) {
-        
-        var data = JSON.parse(res);
-      
-        if (data.status) {
-            var html = '<div class="card">'
-            html += '  <div class="card-content">'
-            html += '    <div class="card-content-inner"><b>SIMPANAN WAJIB</b><br>Saldo: ' + data.saldo
-            html += '    <br>Nominal setoran: 100.000'
-            if (data.stbayar == '') {
-              html += '    <br>Status: BELUM BAYAR</div>'
-            } else {
-              html += '    <br>Status: SUDAH BAYAR</div>'
-            }
-            html += '  </div>'
-            html += '</div>'
-            $$('.page-content.main').append(html)
-        } else {
-          app.dialog.alert(data.message, 'Koperasi');
-        }
-      });*/
-      
-      /*app.request.get('http://212.24.111.23/koponline/nasabah/infotab/'+app.data.nonsb, function (res) {
-        
-        var data = JSON.parse(res);
-      
-        if (data.status) {
-            var html = '<div class="card">'
-            html += '  <div class="card-content">'
-            html += '    <div class="card-content-inner"><b>' + data.nama + '</b><br>Saldo: ' + data.saldo
-            html += '    <br>Nominal setoran: 100.000'
-            html += '    <br>Status: BELUM BAYAR</div>'
-            html += '  </div>'
-            html += '</div>'
-            $$('.page-content.main').append(html)
-        } else {
-          app.dialog.alert(data.message, 'Koperasi');
-        }
-      });*/
-      
-      /*app.request.get('http://212.24.111.23/koponline/nasabah/infokrd/'+app.data.nonsb, function (res) {
-        
-        var data = JSON.parse(res);
-      
-        if (data.status) {
-            var html = '<div class="card">'
-            html += '  <div class="card-content">'
-            html += '    <div class="card-content-inner"><b>PINJAMAN</b><br>Sisa angsuran: ' + data.sisa.toLocaleString('ID')
-            html += '    <br>Nominal angsuran: '+data.angspk.toLocaleString('ID')
-            html += '    <br>Angsuran '+data.angsur+'/'+data.jwaktu+'</div>'
-            if (data.stbayar == '') {
-              html += '    <br>Status: BELUM BAYAR</div>'
-            } else {
-              html += '    <br>Status: SUDAH BAYAR</div>'
-            }
-            html += '  </div>'
-            html += '</div>'
-            $$('.page-content.main').append(html)
-        } /*else {
-          app.dialog.alert(data.message, 'Koperasi');
-          // tidak ada data pinjaman
-        }
-      });*/
-      
-      /*app.request.get('http://212.24.111.23/koponline/sistem/antrian', function (res) {
-        
-        var data = JSON.parse(res);
-      
-        if (data.status) {
-            var html = '<div class="card">'
-            html += '  <div class="card-content">'
-            html += '    <div class="card-content-inner"><b>ANTRIAN PERMOHONAN KREDIT</b>'
-            html += '    <br>Nominal setoran: 100.000'
-            html += '    <br>Status: BELUM BAYAR</div>'
-            html += '  </div>'
-            html += '</div>'
-            $$('.page-content.main').append(html)
-        } else {
-          app.dialog.alert(data.message, 'Koperasi');
-        }
-      });*/
     },
-    addRow: function (nomor, tgl, nama, pokok, jw) {
+    addRow: function (item) {
        
       var row = $$('<tr class="input-detail"></tr>');
       
-      $$('<td class="label-cell input-kdrek"></td>').html(nomor).appendTo(row);
-      $$('<td class="label-cell input-nama"></td>').html(tgl).appendTo(row);
-      $$('<td class="label-cell input-nama"></td>').html(nama).appendTo(row);
-      $$('<td class="numeric-cell align="right"></td>').html(pokok).appendTo(row);
-      $$('<td class="label-cell input-nama"></td>').html(jw).appendTo(row);
+      $$('<td class="label-cell input-kdrek"></td>').html(item.nomhn).appendTo(row);
+      $$('<td class="label-cell input-nama"></td>').html(item.tglinput).appendTo(row);
+      $$('<td class="label-cell input-nama"></td>').html(item.nama).appendTo(row);
+      $$('<td class="label-cell input-nama"></td>').html(item.alamat).appendTo(row);
+      $$('<td class="numeric-cell align="right"></td>').html(item.pokok).appendTo(row);
+      // $$('<td class="label-cell input-nama"></td>').html(jw).appendTo(row);
       $$('.preview-table').append(row); // > tbody:last
     },
   },
