@@ -177,7 +177,7 @@ var app  = new Framework7({
 
                     var html = '<div class="card">'
                     html += '  <div class="card-content">'
-                    html += '    <div class="card-content-inner"><b>DAFTAR ANTRIAN</b></div>'
+                    html += '    <div class="card-content-inner"><b>ANTRIAN PINJAMAN</b></div>'
                     html += '  </div>'
                     html += '</div>'
                     html += '<div class="card data-table">'
