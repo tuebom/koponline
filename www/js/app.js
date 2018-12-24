@@ -129,9 +129,15 @@ var app  = new Framework7({
                   html += '  <div class="card-content">'
                   html += '    <div class="card-content-inner"><b>SIMPANAN WAJIB</b><br>Saldo: ' + data.saldo
                   html += '    <br>Nominal setoran: 100.000'
+                  
                   if (data.stbayar == '') {
-                    if (data.tunggak > data.nominal) {
-                      html += '    <br>Status: BELUM BAYAR<br>Tunggakan: '+data.tunggakf+'</div>'
+                      
+                    var t = parseFloat(data.tunggak),
+                    a = parseFloat(data.nominal)
+
+                    // if (data.tunggak > data.nominal) {
+                    if (t > a) {
+                      html += '    <br>Status: BELUM BAYAR<br>Tunggakan: <b>'+data.tunggakf+'</b></div>'
                     } else {
                       html += '    <br>Status: BELUM BAYAR</div>'
                     }
@@ -153,10 +159,19 @@ var app  = new Framework7({
                     var html = '<div class="card">'
                     html += '  <div class="card-content">'
                     html += '    <div class="card-content-inner"><b>PINJAMAN</b><br>Sisa pokok: ' + data.sisa
-                    html += '    <br>Nominal angsuran: '+data.angspk
+                    html += '    <br>Nominal angsuran: '+data.angspkx
                     html += '    <br>Angsuran '+data.angsur+' / '+data.jwaktu
+                    
                     if (data.stbayar == '') {
-                      html += '    <br>Status: BELUM BAYAR</div>'
+                      
+                      var t = parseFloat(data.tunggak),
+                          a = parseFloat(data.angspk)
+                      
+                      if (t > a) {
+                        html += '    <br>Status: BELUM BAYAR<br>Tunggakan: <b>'+data.tunggakf+'</b></div>'
+                      } else {
+                        html += '    <br>Status: BELUM BAYAR</div>'
+                      }
                     } else {
                       html += '    <br>Status: SUDAH BAYAR</div>'
                     }
@@ -195,7 +210,6 @@ var app  = new Framework7({
 
                     var mohon = data.data;
                     for (var i = 0; i < mohon.length; i++) {
-                      console.log(mohon[i].nama)
                       html += '    <tr>'
                       html += '      <td class="label-cell">'+mohon[i].nomhn+'</th>'
                       html += '      <td class="label-cell">'+mohon[i].tglinput+'</th>'
