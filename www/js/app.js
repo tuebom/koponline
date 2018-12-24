@@ -112,7 +112,8 @@ var app  = new Framework7({
             if (data.status) {
                 var html = '<div class="card">'
                 html += '  <div class="card-content">'
-                html += '    <div class="card-content-inner"><b>SIMPANAN KHUSUS</b><br>Saldo: ' + data.saldo + '</div>'
+                html += '    <div class="card-content-inner"><b>SIMPANAN KHUSUS</b><br>No. Rekening: ' + data.norek
+                html += '    <br>Saldo: ' + data.saldo + '</div>'
                 html += '  </div>'
                 html += '</div>'
                 $$('.page-content.main').append(html)
@@ -127,7 +128,8 @@ var app  = new Framework7({
               if (data.status) {
                   var html = '<div class="card">'
                   html += '  <div class="card-content">'
-                  html += '    <div class="card-content-inner"><b>SIMPANAN WAJIB</b><br>Saldo: ' + data.saldo
+                  html += '    <div class="card-content-inner"><b>SIMPANAN WAJIB</b><br>No. Rekening: ' + data.norek
+                  html += '    <br>Saldo: ' + data.saldo
                   html += '    <br>Nominal setoran: 100.000'
                   
                   if (data.stbayar == '') {
@@ -158,7 +160,8 @@ var app  = new Framework7({
                 if (data.status) {
                     var html = '<div class="card">'
                     html += '  <div class="card-content">'
-                    html += '    <div class="card-content-inner"><b>PINJAMAN</b><br>Sisa pokok: ' + data.sisa
+                    html += '    <div class="card-content-inner"><b>PINJAMAN</b><br>No. Rekening: ' + data.norek
+                    html += '    <br>Sisa pokok: ' + data.sisa
                     html += '    <br>Nominal angsuran: '+data.angspkx
                     html += '    <br>Angsuran '+data.angsur+' / '+data.jwaktu
                     
