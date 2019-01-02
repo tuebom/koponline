@@ -165,7 +165,7 @@ var app  = new Framework7({
                     html += '    <br>Nominal angsuran: '+ data.angspkx
                     html += '    <br>Angsuran '+ data.angsur+' / '+ data.jwaktu
 
-                    var tgl = data.tglbyr;
+                    var tgl = new Date(data.tglbyr);
                     var tglbyr = tgl.getDate()+'/'+(tgl.getMonth()+1)+'/'+tgl.getFullYear();
                     html += '    <br>Tanggal bayar terakhir: '+ tglbyr
                     
