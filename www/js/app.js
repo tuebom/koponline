@@ -165,9 +165,9 @@ var app  = new Framework7({
                     html += '    <br>Nominal angsuran: '+ data.angspkx
                     html += '    <br>Angsuran '+ data.angsur+' / '+ data.jwaktu
 
-                    var tgl = new Date(data.tglbyr);
-                    var tglbyr = tgl.getDate()+'/'+(tgl.getMonth()+1)+'/'+tgl.getFullYear();
-                    html += '    <br>Tanggal bayar terakhir: '+ tglbyr
+                    // var tgl = new Date(data.tglbyr);
+                    // var tglbyr = tgl.getDate()+'/'+(tgl.getMonth()+1)+'/'+tgl.getFullYear();
+                    // html += '    <br>Tanggal bayar terakhir: '+ tglbyr
                     
                     if (data.stbayar == '') {
                       
@@ -175,13 +175,18 @@ var app  = new Framework7({
                           a = parseFloat(data.angspk)
                       
                       if (t > a) {
-                        html += '    <br>Status: BELUM BAYAR<br>Tunggakan: <b>'+data.tunggakf+'</b></div>'
+                        html += '    <br>Status: BELUM BAYAR<br>Tunggakan: <b>'+data.tunggakf+'</b>'
                       } else {
-                        html += '    <br>Status: BELUM BAYAR</div>'
+                        html += '    <br>Status: BELUM BAYAR'
                       }
                     } else {
-                      html += '    <br>Status: SUDAH BAYAR</div>'
+                      html += '    <br>Status: SUDAH BAYAR'
                     }
+                    
+                    var tgl = new Date(data.tglbyr);
+                    var tglbyr = tgl.getDate()+'/'+(tgl.getMonth()+1)+'/'+tgl.getFullYear();
+                    html += '    <br>Tanggal bayar terakhir: '+ tglbyr + '</div>'
+
                     html += '  </div>'
                     html += '</div>'
                     $$('.page-content.main').append(html)
