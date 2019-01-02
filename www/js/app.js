@@ -162,8 +162,12 @@ var app  = new Framework7({
                     html += '  <div class="card-content">'
                     html += '    <div class="card-content-inner"><b>PINJAMAN</b><br>No. Rekening: ' + data.norek
                     html += '    <br>Sisa pokok: ' + data.sisa
-                    html += '    <br>Nominal angsuran: '+data.angspkx
-                    html += '    <br>Angsuran '+data.angsur+' / '+data.jwaktu
+                    html += '    <br>Nominal angsuran: '+ data.angspkx
+                    html += '    <br>Angsuran '+ data.angsur+' / '+ data.jwaktu
+
+                    var tgl = data.tglbyr;
+                    var tglbyr = tgl.getDate()+'/'+(tgl.getMonth()+1)+'/'+tgl.getFullYear();
+                    html += '    <br>Tanggal bayar terakhir: '+ tglbyr
                     
                     if (data.stbayar == '') {
                       
@@ -193,50 +197,54 @@ var app  = new Framework7({
                 
                   if (data.status) {
 
-                    var html = '<div class="card">'
-                    html += '  <div class="card-content">'
-                    html += '    <div class="card-content-inner"><b>ANTRIAN PINJAMAN</b></div>'
-                    html += '  </div>'
-                    html += '</div>'
-                    html += '<div class="card data-table">'
-                    html += '<table class="preview-table">'
-                    html += '  <thead>'
-                    html += '    <tr>'
-                    html += '      <th class="label-cell">Nomor</th>'
-                    html += '      <th class="label-cell">Tgl. Input</th>'
-                    html += '      <th class="label-cell">Nama</th>'
-                    // html += '      <th class="label-cell">Alamat</th>'
-                    html += '      <th class="numeric-cell">Nominal</th>'
-                    html += '    </tr>'
-                    html += '  </thead>'
-                    html += '  <tbody>'
-
                     var mohon = data.data;
-                    for (var i = 0; i < mohon.length; i++) {
-                      html += '    <tr>'
-                      html += '      <td class="label-cell">'+mohon[i].nomhn+'</th>'
-                      html += '      <td class="label-cell">'+mohon[i].tglinput+'</th>'
-                      html += '      <td class="label-cell">'+mohon[i].nama+'</th>'
-                      // html += '      <td class="label-cell">'+mohon[i].alamat+'</th>'
-                      html += '      <td class="numeric-cell">'+mohon[i].pokok+'</th>'
-                      html += '    </tr>'
-                    }
-                    
-                    html += '  </tbody>'
-                    // html += '  <tfoot>'
-                    // html += '    <tr>'
-                    // html += '      <td class="label-cell"></td>'
-                    // html += '      <td class="label-cell"></td>'
-                    // html += '      <td class="label-cell"></td>'
-                    // html += '      <td class="label-cell"><b>TOTAL</b></td>'
-                    // html += '      <td class="numeric-cell total">0</td>'
-                    // html += '      <td></td>'
-                    // html += '    </tr>'
-                    // html += '  </tfoot>'
-                    html += '</table>'
-                    html += '</div>'
 
-                    $$('.page-content.main').append(html)
+                    if (mohon.length > 0) {
+
+                      var html = '<div class="card">'
+                      html += '  <div class="card-content">'
+                      html += '    <div class="card-content-inner"><b>ANTRIAN PINJAMAN</b></div>'
+                      html += '  </div>'
+                      html += '</div>'
+                      html += '<div class="card data-table">'
+                      html += '<table class="preview-table">'
+                      html += '  <thead>'
+                      html += '    <tr>'
+                      html += '      <th class="label-cell">Nomor</th>'
+                      html += '      <th class="label-cell">Tgl. Input</th>'
+                      html += '      <th class="label-cell">Nama</th>'
+                      // html += '      <th class="label-cell">Alamat</th>'
+                      html += '      <th class="numeric-cell">Nominal</th>'
+                      html += '    </tr>'
+                      html += '  </thead>'
+                      html += '  <tbody>'
+
+                      for (var i = 0; i < mohon.length; i++) {
+                        html += '    <tr>'
+                        html += '      <td class="label-cell">'+mohon[i].nomhn+'</th>'
+                        html += '      <td class="label-cell">'+mohon[i].tglinput+'</th>'
+                        html += '      <td class="label-cell">'+mohon[i].nama+'</th>'
+                        // html += '      <td class="label-cell">'+mohon[i].alamat+'</th>'
+                        html += '      <td class="numeric-cell">'+mohon[i].pokok+'</th>'
+                        html += '    </tr>'
+                      }
+                      
+                      html += '  </tbody>'
+                      // html += '  <tfoot>'
+                      // html += '    <tr>'
+                      // html += '      <td class="label-cell"></td>'
+                      // html += '      <td class="label-cell"></td>'
+                      // html += '      <td class="label-cell"></td>'
+                      // html += '      <td class="label-cell"><b>TOTAL</b></td>'
+                      // html += '      <td class="numeric-cell total">0</td>'
+                      // html += '      <td></td>'
+                      // html += '    </tr>'
+                      // html += '  </tfoot>'
+                      html += '</table>'
+                      html += '</div>'
+
+                      $$('.page-content.main').append(html)
+                    }
                   }
                 });
               });
