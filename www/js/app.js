@@ -174,7 +174,7 @@ var app  = new Framework7({
                       var t = parseFloat(data.tunggak),
                           a = parseFloat(data.angspk)
                       
-                      if (t > a) {
+                      if (t - a > 100) {
                         html += '    <br>Status: BELUM BAYAR<br>Tunggakan: <b>'+data.tunggakf+'</b>'
                       } else {
                         html += '    <br>Status: BELUM BAYAR'
