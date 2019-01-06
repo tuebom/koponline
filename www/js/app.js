@@ -185,7 +185,8 @@ var app  = new Framework7({
                     
                     var tgl = new Date(data.tglbyr);
                     var tglbyr = tgl.getDate()+'/'+(tgl.getMonth()+1)+'/'+tgl.getFullYear();
-                    html += '    <br>Tanggal bayar terakhir: '+ tglbyr + '</div>'
+                    // html += '    <br>Tanggal bayar terakhir: '+ tglbyr + '</div>'
+                    html += '    <br>Your last payment: '+ tglbyr + '</div>'
 
                     html += '  </div>'
                     html += '</div>'
