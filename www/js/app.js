@@ -76,187 +76,174 @@ var app  = new Framework7({
         var data = JSON.parse(res);
       
         if (data.status) {
-            var html = '<div class="card">'
-            html += '  <div class="card-content">'
-            html += '    <div class="card-content-inner"><b>DATA NASABAH</b><br>Nama: ' + data.nama
-            html += '    <br>Alamat: ' + data.alamat + '</div>'
-            html += '  </div>'
-            html += '</div>'
-            $$('.page-content.main').append(html)
-        } else {
-          app.dialog.alert(data.message, 'Koperasi');
-        }
-
-        app.request.get('http://212.24.111.23/koponline/sistem/is_anggota/'+app.data.nonsb, function (res) {
-          
-          var data = JSON.parse(res);
-
-          if (data.status) {
-
-            var data = JSON.parse(res);
-
+          var html = '<div class="card">'
+          html += '  <div class="card-content">'
+          html += '    <div class="card-content-inner"><b>DATA NASABAH</b><br>Nama: ' + data.nama
+          html += '    <br>Alamat: ' + data.alamat + '</div>'
+          html += '  </div>'
+          html += '</div>'
+          $$('.page-content.main').append(html)
+      
+          if (data.noang) {
             var html = '<div class="card">'
             html += '  <div class="card-content">'
             html += '    <div class="card-content-inner"><b>SIMPANAN POKOK</b><br>Rp' + data.pokok +'</div>'
             html += '  </div>'
             html += '</div>'
             $$('.page-content.main').append(html)
-          // } else {
-          //   app.dialog.alert(data.message, 'Koperasi');
+          }
+        } else {
+          app.dialog.alert(data.message, 'Koperasi');
+        }
+
+        app.request.get('http://212.24.111.23/koponline/nasabah/info_rek/'+app.data.nonsb, function (res) {
+        
+          var data = JSON.parse(res);
+        
+          if (data.sk) {
+            var sk = data.sk;
+            var html = '<div class="card">'
+            html += '  <div class="card-content">'
+            html += '    <div class="card-content-inner"><b>SIMPANAN KHUSUS</b><br>No. Rekening: ' + sk.norek
+            html += '    <br>Saldo: ' + sk.saldo + '</div>'
+            html += '  </div>'
+            html += '</div>'
+            $$('.page-content.main').append(html)
           }
 
-          app.request.get('http://212.24.111.23/koponline/nasabah/infosk/'+app.data.nonsb, function (res) {
-          
-            var data = JSON.parse(res);
-          
-            if (data.status) {
-                var html = '<div class="card">'
-                html += '  <div class="card-content">'
-                html += '    <div class="card-content-inner"><b>SIMPANAN KHUSUS</b><br>No. Rekening: ' + data.norek
-                html += '    <br>Saldo: ' + data.saldo + '</div>'
-                html += '  </div>'
-                html += '</div>'
-                $$('.page-content.main').append(html)
-            } /*else {
-              app.dialog.alert(data.message, 'Koperasi');
-            }*/
-
-            app.request.get('http://212.24.111.23/koponline/nasabah/infosw/'+app.data.nonsb, function (res) {
+          if (data.sw) {
+            var sw = data.sw;
+            var html = '<div class="card">'
+            html += '  <div class="card-content">'
+            html += '    <div class="card-content-inner"><b>SIMPANAN WAJIB</b><br>No. Rekening: ' + sw.norek
+            html += '    <br>Saldo: ' + sw.saldo
+            html += '    <br>Nominal setoran: 100.000'
             
-              var data = JSON.parse(res);
-            
-              if (data.status) {
-                  var html = '<div class="card">'
-                  html += '  <div class="card-content">'
-                  html += '    <div class="card-content-inner"><b>SIMPANAN WAJIB</b><br>No. Rekening: ' + data.norek
-                  html += '    <br>Saldo: ' + data.saldo
-                  html += '    <br>Nominal setoran: 100.000'
-                  
-                  if (data.stbayar == '') {
-                      
-                    var t = parseFloat(data.tunggak),
-                    a = parseFloat(data.nominal)
-
-                    // if (data.tunggak > data.nominal) {
-                    if (t > a) {
-                      html += '    <br>Status: BELUM BAYAR<br>Tunggakan: <b>'+data.tunggakf+'</b></div>'
-                    } else {
-                      html += '    <br>Status: BELUM BAYAR</div>'
-                    }
-                  } else {
-                    html += '    <br>Status: SUDAH BAYAR</div>'
-                  }
-                  html += '  </div>'
-                  html += '</div>'
-                  $$('.page-content.main').append(html)
-              } /*else {
-                app.dialog.alert(data.message, 'Koperasi');
-              }*/
-            
-              app.request.get('http://212.24.111.23/koponline/nasabah/infokrd/'+app.data.nonsb, function (res) {
+            if (sw.stbayar == '') {
                 
-                var data = JSON.parse(res);
+              var t = parseFloat(sw.tunggak),
+              a = parseFloat(sw.nominal)
+
+              // if (sw.tunggak > sw.nominal) {
+              if (t > a) {
+                html += '    <br>Status: BELUM BAYAR<br>Tunggakan: <b>'+sw.tunggakf+'</b></div>'
+              } else {
+                html += '    <br>Status: BELUM BAYAR</div>'
+              }
+            } else {
+              html += '    <br>Status: SUDAH BAYAR</div>'
+            }
+            html += '  </div>'
+            html += '</div>'
+            $$('.page-content.main').append(html)
+          }
+        
+          if (data.pds) {
+            var pds = data.pds;
+            var html = '<div class="card">'
+            html += '  <div class="card-content">'
+            html += '    <div class="card-content-inner"><b>SIMPANAN KHUSUS</b><br>No. Rekening: ' + pds.norek
+            html += '    <br>Saldo: ' + pds.saldo + '</div>'
+            html += '  </div>'
+            html += '</div>'
+            $$('.page-content.main').append(html)
+          }
+      
+          if (data.krd) {
+            var krd = data.krd;  
+            var html = '<div class="card">'
+            html += '  <div class="card-content">'
+            html += '    <div class="card-content-inner"><b>PINJAMAN</b><br>No. Rekening: ' + krd.norek
+            html += '    <br>Sisa pokok: ' + krd.sisa
+            html += '    <br>Nominal angsuran: '+ krd.angspkx
+            html += '    <br>Angsuran '+ krd.angsur+' / '+ krd.jwaktu
+
+            // var tgl = new Date(krd.tglbyr);
+            // var tglbyr = tgl.getDate()+'/'+(tgl.getMonth()+1)+'/'+tgl.getFullYear();
+            // html += '    <br>Tanggal bayar terakhir: '+ tglbyr
+            
+            if (krd.stbayar == '') {
               
-                if (data.status) {
-                    var html = '<div class="card">'
-                    html += '  <div class="card-content">'
-                    html += '    <div class="card-content-inner"><b>PINJAMAN</b><br>No. Rekening: ' + data.norek
-                    html += '    <br>Sisa pokok: ' + data.sisa
-                    html += '    <br>Nominal angsuran: '+ data.angspkx
-                    html += '    <br>Angsuran '+ data.angsur+' / '+ data.jwaktu
+              var t = parseFloat(krd.tunggak),
+                  a = parseFloat(krd.angspk)
+              
+              if (t - a > 100) {
+                html += '    <br>Status: BELUM BAYAR<br>Tunggakan: <b>'+krd.tunggakf+'</b>'
+              } else {
+                html += '    <br>Status: BELUM BAYAR'
+              }
+            } else {
+              html += '    <br>Status: SUDAH BAYAR'
+            }
+            
+            var tgl = new Date(krd.tglbyr);
+            var tglbyr = tgl.getDate()+'/'+(tgl.getMonth()+1)+'/'+tgl.getFullYear();
+            // html += '    <br>Tanggal bayar terakhir: '+ tglbyr + '</div>'
+            html += '    <br>Your last payment: '+ tglbyr + '</div>'
 
-                    // var tgl = new Date(data.tglbyr);
-                    // var tglbyr = tgl.getDate()+'/'+(tgl.getMonth()+1)+'/'+tgl.getFullYear();
-                    // html += '    <br>Tanggal bayar terakhir: '+ tglbyr
-                    
-                    if (data.stbayar == '') {
-                      
-                      var t = parseFloat(data.tunggak),
-                          a = parseFloat(data.angspk)
-                      
-                      if (t - a > 100) {
-                        html += '    <br>Status: BELUM BAYAR<br>Tunggakan: <b>'+data.tunggakf+'</b>'
-                      } else {
-                        html += '    <br>Status: BELUM BAYAR'
-                      }
-                    } else {
-                      html += '    <br>Status: SUDAH BAYAR'
-                    }
-                    
-                    var tgl = new Date(data.tglbyr);
-                    var tglbyr = tgl.getDate()+'/'+(tgl.getMonth()+1)+'/'+tgl.getFullYear();
-                    // html += '    <br>Tanggal bayar terakhir: '+ tglbyr + '</div>'
-                    html += '    <br>Your last payment: '+ tglbyr + '</div>'
-
-                    html += '  </div>'
-                    html += '</div>'
-                    $$('.page-content.main').append(html)
-                } /*else {
-                  app.dialog.alert(data.message, 'Koperasi');
-                  // tidak ada data pinjaman
-                }*/
-
-
-                app.request.get('http://212.24.111.23/koponline/sistem/antrian', function (res) {
-                
-                  var data = JSON.parse(res);
-                
-                  if (data.status) {
-
-                    var mohon = data.data;
-
-                    if (mohon.length > 0) {
-
-                      var html = '<div class="card">'
-                      html += '  <div class="card-content">'
-                      html += '    <div class="card-content-inner"><b>ANTRIAN PINJAMAN</b></div>'
-                      html += '  </div>'
-                      html += '</div>'
-                      html += '<div class="card data-table">'
-                      html += '<table class="preview-table">'
-                      html += '  <thead>'
-                      html += '    <tr>'
-                      html += '      <th class="label-cell">Nomor</th>'
-                      html += '      <th class="label-cell">Tgl. Input</th>'
-                      html += '      <th class="label-cell">Nama</th>'
-                      // html += '      <th class="label-cell">Alamat</th>'
-                      html += '      <th class="numeric-cell">Nominal</th>'
-                      html += '    </tr>'
-                      html += '  </thead>'
-                      html += '  <tbody>'
-
-                      for (var i = 0; i < mohon.length; i++) {
-                        html += '    <tr>'
-                        html += '      <td class="label-cell">'+mohon[i].nomhn+'</th>'
-                        html += '      <td class="label-cell">'+mohon[i].tglinput+'</th>'
-                        html += '      <td class="label-cell">'+mohon[i].nama+'</th>'
-                        // html += '      <td class="label-cell">'+mohon[i].alamat+'</th>'
-                        html += '      <td class="numeric-cell">'+mohon[i].pokok+'</th>'
-                        html += '    </tr>'
-                      }
-                      
-                      html += '  </tbody>'
-                      // html += '  <tfoot>'
-                      // html += '    <tr>'
-                      // html += '      <td class="label-cell"></td>'
-                      // html += '      <td class="label-cell"></td>'
-                      // html += '      <td class="label-cell"></td>'
-                      // html += '      <td class="label-cell"><b>TOTAL</b></td>'
-                      // html += '      <td class="numeric-cell total">0</td>'
-                      // html += '      <td></td>'
-                      // html += '    </tr>'
-                      // html += '  </tfoot>'
-                      html += '</table>'
-                      html += '</div>'
-
-                      $$('.page-content.main').append(html)
-                    }
-                  }
-                });
-              });
-            });
-          });
+            html += '  </div>'
+            html += '</div>'
+            $$('.page-content.main').append(html)
+          }
         });
+
+        /*app.request.get('http://212.24.111.23/koponline/sistem/antrian', function (res) {
+        
+          var data = JSON.parse(res);
+        
+          if (data.status) {
+
+            var mohon = data.data;
+
+            if (mohon.length > 0) {
+
+              var html = '<div class="card">'
+              html += '  <div class="card-content">'
+              html += '    <div class="card-content-inner"><b>ANTRIAN PINJAMAN</b></div>'
+              html += '  </div>'
+              html += '</div>'
+              html += '<div class="card data-table">'
+              html += '<table class="preview-table">'
+              html += '  <thead>'
+              html += '    <tr>'
+              html += '      <th class="label-cell">Nomor</th>'
+              html += '      <th class="label-cell">Tgl. Input</th>'
+              html += '      <th class="label-cell">Nama</th>'
+              // html += '      <th class="label-cell">Alamat</th>'
+              html += '      <th class="numeric-cell">Nominal</th>'
+              html += '    </tr>'
+              html += '  </thead>'
+              html += '  <tbody>'
+
+              for (var i = 0; i < mohon.length; i++) {
+                html += '    <tr>'
+                html += '      <td class="label-cell">'+mohon[i].nomhn+'</th>'
+                html += '      <td class="label-cell">'+mohon[i].tglinput+'</th>'
+                html += '      <td class="label-cell">'+mohon[i].nama+'</th>'
+                // html += '      <td class="label-cell">'+mohon[i].alamat+'</th>'
+                html += '      <td class="numeric-cell">'+mohon[i].pokok+'</th>'
+                html += '    </tr>'
+              }
+              
+              html += '  </tbody>'
+              // html += '  <tfoot>'
+              // html += '    <tr>'
+              // html += '      <td class="label-cell"></td>'
+              // html += '      <td class="label-cell"></td>'
+              // html += '      <td class="label-cell"></td>'
+              // html += '      <td class="label-cell"><b>TOTAL</b></td>'
+              // html += '      <td class="numeric-cell total">0</td>'
+              // html += '      <td></td>'
+              // html += '    </tr>'
+              // html += '  </tfoot>'
+              html += '</table>'
+              html += '</div>'
+
+              $$('.page-content.main').append(html)
+            }
+          }
+        });*/
+
       });
     },
     addRow: function (item) {
@@ -662,12 +649,6 @@ $$('#my-login-screen .login-button').on('click', function () {
       //     app.dialog.alert(data.message, 'Akun Saya');
       //   }
       // });
-
-      // if ( AdMob ) {
-     
-      //   // this will create a banner on startup
-      //   AdMob.showBanner(AdMob.AD_POSITION.BOTTOM_CENTER);
-      // }
 
     } else {
       app.dialog.alert(data.message, 'Login Member');

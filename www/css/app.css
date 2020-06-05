@@ -368,6 +368,7 @@ div[class*="col-"] {
 .item-title.menu {
   color: #607d8b;
   font-weight: 500;
+  margin-top: 5px;
 }
 
 .item-inner.menu {

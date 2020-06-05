@@ -209,6 +209,52 @@ routes = [
     }
   },
   {
+    path: '/mhn-kredit/',
+    url: './pages/permohonan.html',
+    on: {
+      pageInit: function (event, page) {
+      
+        $$('.btnKirim').on('click', function(e){
+          //e.preventDefault();
+          
+          var pokok = $$('#pokok').val();
+          
+          if (pokok == '') {
+              app.dialog.alert('Masukkan jumlah pokok pinjaman.', 'Permohonan Kredit');
+              return;
+          }
+          
+          var jwaktu = $$('#jwaktu').val();
+          
+          if (jwaktu == '') {
+              app.dialog.alert('Masukkan jangka waktu pinjaman.', 'Permohonan Kredit');
+              return;
+          }
+
+          app.preloader.show();
+
+          var formData = app.form.convertToData('.mohon');
+          formData.nonsb = app.data.nonsb;
+          formData.Authorization = app.data.token;
+          
+          app.request.post('http://212.24.111.23/koponline/kredit/input', formData, function (res) {
+            
+            app.preloader.hide();
+            
+            var data = JSON.parse(res);
+        
+            if (data.status) {
+              app.router.back();
+            } else {
+              app.dialog.alert(data.message, 'Permohonan Kredit');
+            }
+          });
+        });
+      
+      },
+    }
+  },
+  {
     path: '/komplain/',
     url: './pages/komplain.html',
     on: {
