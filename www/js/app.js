@@ -149,8 +149,8 @@ var app  = new Framework7({
             $$('.page-content.main').append(html)
           }
       
-          if (data.krd) {
-            var krd = data.krd;  
+          if (data.pnj) {
+            var krd = data.pnj;  
             var html = '<div class="card">'
             html += '  <div class="card-content">'
             html += '    <div class="card-content-inner"><b>PINJAMAN</b><br>No. Rekening: ' + krd.norek
@@ -802,6 +802,19 @@ $$(document).on('backbutton', function (e) {
   e.preventDefault();
 
   // for example, based on what and where view you have
+  var leftp  = app.panel.left && app.panel.left.opened;
+  var rightp = app.panel.right && app.panel.right.opened;
+  
+  if (leftp || rightp) {
+
+      app.panel.close();
+      return false;
+  } else
+  if ($$('.modal-in').length > 0) {
+
+      navigator.app.exitApp();
+      return false;
+  } else
   if (app.views.main.router.url === '/') {
     
     // if (app.data.bLogedIn) {
