@@ -142,7 +142,7 @@ var app  = new Framework7({
             var pds = data.pds;
             var html = '<div class="card">'
             html += '  <div class="card-content">'
-            html += '    <div class="card-content-inner"><b>SIMPANAN KHUSUS</b><br>No. Rekening: ' + pds.norek
+            html += '    <div class="card-content-inner"><b>TABUNGAN PDS</b><br>No. Rekening: ' + pds.norek
             html += '    <br>Saldo: ' + pds.saldo + '</div>'
             html += '  </div>'
             html += '</div>'
